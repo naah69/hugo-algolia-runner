@@ -1,0 +1,13 @@
+quarkus:
+  banner:
+    enabled: false
+"%prod":
+  quarkus:
+    log:
+      category:
+        io.quarkus: ERROR
+
+blog:
+  new-blog:
+    prefix:
+      enabled: true
