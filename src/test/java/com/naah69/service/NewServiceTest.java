@@ -38,7 +38,7 @@ class NewServiceTest {
     @Test
     void generatePrefix() {
         ConfigValue configValue = ConfigProvider.getConfig().getConfigValue("blog.new-blog.prefix.enabled");
-        String s = newService.generatePrefix(commandConfig.newBlog().map(c -> c.prefix().orElse(null)));
+        String s = newService.generatePrefix(commandConfig.newBlog().prefix());
         System.out.println(s);
     }
 }

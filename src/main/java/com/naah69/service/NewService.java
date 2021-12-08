@@ -23,9 +23,9 @@ public class NewService {
 
     public String generateFileName(String fileName) {
         StringBuilder sb = new StringBuilder();
-        Optional<CommandConfig.New> newConfig = commandConfig.newBlog();
+        CommandConfig.New newConfig = commandConfig.newBlog();
         sb.append(generateDir(newConfig));
-        sb.append(generatePrefix(newConfig.map(c->c.prefix().orElse(null))));
+        sb.append(generatePrefix(newConfig.prefix()));
         sb.append(fixFilename(fileName));
         return sb.toString();
     }
@@ -34,8 +34,8 @@ public class NewService {
         return fileName + (!fileName.endsWith(".md") ? ".md" : NULL_STR);
     }
 
-    public String generateDir(Optional<CommandConfig.New> newConfig) {
-        String dir = newConfig.map(c -> c.dir().orElse(NULL_STR)).orElse(NULL_STR);
+    public String generateDir(CommandConfig.New newConfig) {
+        String dir = newConfig.dir().orElse(NULL_STR);
         if (!isNullOrEmpty(dir)) {
             dir = dir.replace("/", File.separator);
             dir = dir.replace("\\", File.separator);
@@ -53,20 +53,21 @@ public class NewService {
     }
 
 
-    public String generatePrefix(Optional<CommandConfig.New.Prefix> prefix) {
-        Boolean enable = prefix.map(p -> p.enabled()).orElse(Boolean.FALSE);
+    public String generatePrefix(CommandConfig.New.Prefix prefix) {
+        Boolean enable = prefix.enabled();
         String prefixStr = NULL_STR;
+
         if (enable) {
-            prefix.map(p -> {
-                switch (p.prefixType()) {
+                switch (prefix.prefixType()) {
                     case DATE:
-                        return DateTimeFormatter.ofPattern(p.dateFormat()).format(LocalDate.now());
+                        prefixStr = DateTimeFormatter.ofPattern(prefix.dateFormat()).format(LocalDate.now());
+                        break;
                     case STRING:
                     default:
-                        return p.prefixStr().orElse(NULL_STR);
+                        prefixStr = prefix.prefixStr().orElse(NULL_STR);
                 }
-            }).orElse(NULL_STR);
-            String sep = prefix.map(p -> p.sep()).orElse("-");
+
+            String sep = prefix.sep();
             if (!isNullOrEmpty(prefixStr)) {
                 prefixStr = prefixStr + sep;
             }
