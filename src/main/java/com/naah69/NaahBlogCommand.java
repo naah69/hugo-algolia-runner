@@ -1,11 +1,7 @@
 package com.naah69;
 
-import com.naah69.command.CompileCommand;
-import com.naah69.command.DeployCommand;
-import com.naah69.command.NewCommand;
-import com.naah69.command.ServerCommand;
+import com.naah69.command.*;
 import io.quarkus.picocli.runtime.annotations.TopCommand;
-import io.quarkus.runtime.annotations.QuarkusMain;
 import picocli.CommandLine;
 
 @TopCommand
@@ -14,7 +10,7 @@ import picocli.CommandLine;
         ServerCommand.class,
         CompileCommand.class,
         DeployCommand.class,
-        ServerCommand.class
+        ProdCommand.class
 })
 public class NaahBlogCommand {
 

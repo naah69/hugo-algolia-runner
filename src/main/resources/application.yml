@@ -1,13 +1,21 @@
 quarkus:
   banner:
     enabled: false
+  native:
+    resources:
+      includes:
+        - META-INF\\services\\**
 "%prod":
   quarkus:
     log:
       category:
-        io.quarkus: ERROR
-
-blog:
-  new-blog:
-    prefix:
-      enabled: true
+        "io.quarkus":
+          level: ERROR
+"%test":
+  quarkus:
+    log:
+      category:
+        "io.quarkus":
+          level: DEBUG
+        "com.naah69":
+          level: DEBUG

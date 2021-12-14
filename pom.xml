@@ -32,6 +32,22 @@
     </dependencyManagement>
     <dependencies>
         <dependency>
+            <groupId>com.hankcs</groupId>
+            <artifactId>hanlp</artifactId>
+            <version>portable-1.6.8</version>
+        </dependency>
+        <dependency>
+            <groupId>com.algolia</groupId>
+            <artifactId>algoliasearch-core</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.algolia</groupId>
+            <artifactId>algoliasearch-apache</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-picocli</artifactId>
         </dependency>
@@ -159,7 +175,7 @@
                 <reportErrorsAtRuntime>true</reportErrorsAtRuntime>
                 <quarkus.package.type>native</quarkus.package.type>
                 <quarkus.native.additional-build-args>
-                    --report-unsupported-elements-at-runtime,--no-server,-J-Xmx32G,-J-Xms8G,-H:NumberOfThreads=32,-H:+AllowVMInspection
+                    --report-unsupported-elements-at-runtime,-J-Xmx32G,-J-Xms8G,-H:NumberOfThreads=32,-g
                 </quarkus.native.additional-build-args>
             </properties>
         </profile>

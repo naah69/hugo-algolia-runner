@@ -3,10 +3,7 @@ package com.naah69.infrastructure.utils;
 import lombok.SneakyThrows;
 import org.jboss.logging.Logger;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.concurrent.*;
 
 public class RuntimeExec {
@@ -15,7 +12,13 @@ public class RuntimeExec {
 
     @SneakyThrows
     public static boolean run(String command) {
-        Process process = Runtime.getRuntime().exec(command);
+        return run(command,"");
+    }
+
+    @SneakyThrows
+    public static boolean run(String command,String dir) {
+//        Runtime.getRuntime().exec(cmd，null，new File(“path”))
+        Process process = Runtime.getRuntime().exec(command,null,new File("dir"));
         clearStream(process.getInputStream(),true);
         clearStream(process.getErrorStream(),false);
         int i = process.waitFor();
